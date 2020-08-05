@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CardModel::class], version = 1)
+@Database(entities = [CardModel::class], version = 2)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun dao() : Dao
@@ -24,6 +24,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext, AppRoomDatabase::class.java,
                     "card_database")
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 return instance

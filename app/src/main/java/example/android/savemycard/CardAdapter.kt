@@ -16,7 +16,10 @@ class CardAdapter(): RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.itemView.cardNum.text = cardList[position].cardNum
+        holder.itemView.cardNum.text = cardList[position].cardNum+"\n"+cardList[position].holderName+"\n"+cardList[position].expDate+
+        "\n"+cardList[position].cardName+"\t"+cardList[position].cardType+"\n"+cardList[position].bankName+"\t"+cardList[position].cardCvv+
+                "\n"+cardList[position].bankIfsc
+
     }
 
     override fun getItemCount(): Int {

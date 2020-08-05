@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         addBtn.setOnClickListener {
-            val card = CardModel("Yeyeyeyeye")
+            val card = CardModel("6070 6625 4401 9051","05/24", "Sanchit Verma",
+            "Visa","Debit","SBI","SBIN000321", "856")
             mainViewModel.addCard(card)
         }
 
