@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCardFragment">
+
+    <EditText
+        android:id="@+id/cardNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Acc num"/>
+    <EditText
+        android:id="@+id/exprDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exp Date"/>
+    <EditText
+        android:id="@+id/holderNamae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Holder name"/>
+    <EditText
+        android:id="@+id/cardNamee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Card Name"/>
+    <EditText
+        android:id="@+id/cardType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Card Type"/>
+    <EditText
+        android:id="@+id/bankName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bank Name"/>
+    <EditText
+        android:id="@+id/bankIfsc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bank ifsc"/>
+    <EditText
+        android:id="@+id/cardCvv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Card Cvv"/>
+
+    <Button
+        android:id="@+id/addCardBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Add Card" />
+
+</LinearLayout>

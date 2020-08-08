@@ -7,12 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_item.view.*
 
-class CardAdapter(): RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+class CardAdapter(private val mListener : OnItemClickListener): RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
-    var cardList =  listOf<CardModel>()
+    private var cardList =  listOf<CardModel>()
+    var b : Boolean = true
+
+    interface OnItemClickListener{
+        fun onItemClick(card: CardModel)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        return CardViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_item,parent,false))
+        return CardViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_item,parent,false), mListener, cardList)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -30,8 +36,19 @@ class CardAdapter(): RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
         this.cardList = cardList
         notifyDataSetChanged()
     }
-
-    class CardViewHolder(view :View): RecyclerView.ViewHolder(view)
+    class CardViewHolder(view :View, listener: OnItemClickListener, cardList : List<CardModel>): RecyclerView.ViewHolder(view){
+        var cards = cardList
+        init {
+            view.setOnClickListener {
+                if(listener != null){
+                    val position = adapterPosition
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(cards.get(position))
+                    }
+                }
+            }
+        }
+    }
 
 
 }

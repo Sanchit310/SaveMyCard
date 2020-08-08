@@ -6,18 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_card.*
 
 
-class CardFragment : Fragment() {
+class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
     private lateinit var mainViewModel: MainViewModel
     // var cardList  = arrayListOf<CardModel>()
     lateinit var cardAdapter: CardAdapter
@@ -33,7 +35,7 @@ class CardFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        cardAdapter = CardAdapter()
+        cardAdapter = CardAdapter(this)
         recyclerView.adapter = cardAdapter
         recyclerView.clipToPadding = false
         recyclerView.clipChildren = false
@@ -59,21 +61,17 @@ class CardFragment : Fragment() {
         })
 
         addBtn.setOnClickListener {
-            if(b){
-                val card = CardModel("6070 6625 4401 9051","05/24", "Sanchit Verma",
-                    "Visa","Debit","SBI","SBIN000321", "856")
-                mainViewModel.addCard(card)
-                b =!b
-            }else{
-                val card = CardModel("6070 6625 4401 9051","05/24", "Sanchit Verma",
-                    "Rupay","Debit","UCO","SBIN000321", "856")
-                mainViewModel.addCard(card)
-                b =!b
-            }
+            val action  = CardFragmentDirections.actionCardFragmentToAddCardFragment()
+            Navigation.findNavController(it).navigate(action)
+
 
         }
 
 
+    }
+
+    override fun onItemClick(card: CardModel) {
+        Toast.makeText(activity, "Clicked ${card.cardNum}", Toast.LENGTH_SHORT).show()
     }
 
 
