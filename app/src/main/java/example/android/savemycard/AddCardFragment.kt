@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import kotlinx.android.synthetic.main.fragment_add_card.*
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_add_card.view.*
  * A simple [Fragment] subclass.
  */
 class AddCardFragment : Fragment() {
+    var card : CardModel? = null
 
     private lateinit var mainViewModel: MainViewModel
 
@@ -28,9 +30,14 @@ class AddCardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        arguments?.let {
+            card = AddCardFragmentArgs.fromBundle(it).CardDetails
+            cardNo.setText(card?.cardNum)
+        }
+
+
+
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-
 
         addCardBtn.setOnClickListener {
             val carNum = cardNo.text.toString()
@@ -41,8 +48,17 @@ class AddCardFragment : Fragment() {
             val bankName = bankName.text.toString()
             val bankIFSC = bankIfsc.text.toString()
             val cardCvv = cardCvv.text.toString()
-            val card = CardModel(carNum,expDate,holderName,cardName,cardType,bankName,bankIFSC,cardCvv)
-            mainViewModel.addCard(card)
+            val mCard = CardModel(carNum,expDate,holderName,cardName,cardType,bankName,bankIFSC,cardCvv)
+
+            if(card == null){
+                mainViewModel.addCard(mCard)
+                Toast.makeText(activity, "added", Toast.LENGTH_SHORT).show()
+            }else{
+                mCard.id = card!!.id
+                mainViewModel.updateCard(mCard)
+                Toast.makeText(activity, "updated", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

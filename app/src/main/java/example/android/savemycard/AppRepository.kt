@@ -10,4 +10,8 @@ class AppRepository(private val dao : Dao) {
         dao.addCard(cardModel)
     }
 
+    suspend fun updateCard(cardModel: CardModel){
+        dao.updateCard(cardModel)
+    }
+
 }

@@ -24,4 +24,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateCard(cardModel: CardModel){
+        viewModelScope.launch {
+            appRepository.updateCard(cardModel)
+        }
+    }
+
 }

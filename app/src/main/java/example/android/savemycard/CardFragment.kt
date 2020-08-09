@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
     // var cardList  = arrayListOf<CardModel>()
     lateinit var cardAdapter: CardAdapter
     private var b : Boolean = true
+    lateinit var  navController : NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,11 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_card, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,6 +61,8 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
 
         })
 
+
+
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mainViewModel.allCard.observe(viewLifecycleOwner, Observer { cards->
             cards?.let { cardAdapter.setCard(cards) }
@@ -71,7 +80,9 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(card: CardModel) {
-        Toast.makeText(activity, "Clicked ${card.cardNum}", Toast.LENGTH_SHORT).show()
+        val action = CardFragmentDirections.actionCardFragmentToAddCardFragment(card)
+       navController.navigate(action)
+     //   Toast.makeText(activity, "Clicked ${card.cardNum}", Toast.LENGTH_SHORT).show()
     }
 
 
