@@ -30,4 +30,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteCard(cardModel: CardModel){
+        viewModelScope.launch {
+            appRepository.deleteCard(cardModel)
+        }
+    }
+
 }

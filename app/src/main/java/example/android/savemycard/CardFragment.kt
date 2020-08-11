@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -61,13 +62,13 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
 
         })
 
-
-
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mainViewModel.allCard.observe(viewLifecycleOwner, Observer { cards->
             cards?.let { cardAdapter.setCard(cards) }
 
         })
+
+
 
         addBtn.setOnClickListener {
             val action  = CardFragmentDirections.actionCardFragmentToAddCardFragment()
@@ -83,6 +84,11 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
         val action = CardFragmentDirections.actionCardFragmentToAddCardFragment(card)
        navController.navigate(action)
      //   Toast.makeText(activity, "Clicked ${card.cardNum}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onItemLongClick(card: CardModel) {
+        mainViewModel.deleteCard(card)
+        Toast.makeText(activity, "Clicked ${card.cardNum}", Toast.LENGTH_SHORT).show()
     }
 
 

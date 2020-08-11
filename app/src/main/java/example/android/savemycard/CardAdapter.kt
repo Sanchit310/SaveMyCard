@@ -14,6 +14,7 @@ class CardAdapter(private val mListener : OnItemClickListener): RecyclerView.Ada
 
     interface OnItemClickListener{
         fun onItemClick(card: CardModel)
+        fun onItemLongClick(card: CardModel)
     }
 
 
@@ -32,10 +33,15 @@ class CardAdapter(private val mListener : OnItemClickListener): RecyclerView.Ada
         return cardList.size
     }
 
-    public fun setCard(cardList : List<CardModel>){
+    fun setCard(cardList : List<CardModel>){
         this.cardList = cardList
         notifyDataSetChanged()
     }
+
+    fun getCardAt(position :Int) : CardModel{
+        return cardList.get(position)
+    }
+
     class CardViewHolder(view :View, listener: OnItemClickListener, cardList : List<CardModel>): RecyclerView.ViewHolder(view){
         var cards = cardList
         init {
@@ -47,6 +53,18 @@ class CardAdapter(private val mListener : OnItemClickListener): RecyclerView.Ada
                     }
                 }
             }
+            view.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(p0: View?): Boolean {
+                    if(listener != null){
+                        val position = adapterPosition
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemLongClick(cards.get(position))
+                        }
+                    }
+                    return true
+                }
+
+            })
         }
     }
 

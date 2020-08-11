@@ -1,10 +1,8 @@
 package example.android.savemycard
 
 import androidx.lifecycle.LiveData
+import androidx.room.*
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface Dao {
@@ -14,6 +12,9 @@ interface Dao {
 
     @Update
     suspend fun updateCard(cardModel: CardModel)
+
+    @Delete
+    suspend fun deleteCard(cardModel: CardModel)
 
     @Query("SELECT * FROM card_table")
     fun getAllCards() : LiveData<List<CardModel>>

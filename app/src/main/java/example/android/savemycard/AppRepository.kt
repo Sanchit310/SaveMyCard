@@ -14,4 +14,8 @@ class AppRepository(private val dao : Dao) {
         dao.updateCard(cardModel)
     }
 
+    suspend fun deleteCard(cardModel: CardModel){
+        dao.deleteCard(cardModel)
+    }
+
 }

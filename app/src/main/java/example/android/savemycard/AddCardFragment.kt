@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_add_card.*
 import kotlinx.android.synthetic.main.fragment_add_card.view.*
 
@@ -58,6 +59,9 @@ class AddCardFragment : Fragment() {
                 mainViewModel.updateCard(mCard)
                 Toast.makeText(activity, "updated", Toast.LENGTH_SHORT).show()
             }
+
+            val action = AddCardFragmentDirections.actionAddCardFragmentToCardFragment()
+            Navigation.findNavController(it).navigate(action)
 
         }
 
