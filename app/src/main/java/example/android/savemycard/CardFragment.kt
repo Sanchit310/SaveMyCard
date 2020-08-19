@@ -43,7 +43,7 @@ class CardFragment : Fragment(), CardAdapter.OnItemClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        cardAdapter = CardAdapter(this)
+        cardAdapter = CardAdapter(requireContext().applicationContext,this)
         recyclerView.adapter = cardAdapter
         recyclerView.clipToPadding = false
         recyclerView.clipChildren = false

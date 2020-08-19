@@ -47,9 +47,10 @@ class AddCardFragment : Fragment() {
             val cardName = cardNamee.text.toString()
             val cardType = cardType.text.toString()
             val bankName = bankName.text.toString()
+            val accountNum =  accountNum.text.toString()
             val bankIFSC = bankIfsc.text.toString()
             val cardCvv = cardCvv.text.toString()
-            val mCard = CardModel(carNum,expDate,holderName,cardName,cardType,bankName,bankIFSC,cardCvv)
+            val mCard = CardModel(carNum,expDate,holderName,cardName,cardType,bankName,accountNum,bankIFSC,cardCvv)
 
             if(card == null){
                 mainViewModel.addCard(mCard)
