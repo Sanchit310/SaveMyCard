@@ -5,7 +5,7 @@ An android app having information related to COVID-19.
 - Built using Room persistence library to save the cards.
 - User can see the change in card while entering card info.
 - A completely offline app
-- Passcode functionality will be added for security(Upcoming features)
+- Passcode functionality will be added for security(Upcoming feature)
 - Still not a complete project.
 
 ## Screenshots
